@@ -1,0 +1,109 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>UOWfram</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <link href="{% static "css/dashboard.css" %}" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">UOWfram</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-5 col-md-3 sidebar">
+          <span class='sidebar-title'>Plot options</span>
+          <ul class="nav nav-sidebar">
+            <li><a href="#">Time range</a></li>
+            <li>
+              <div class='row'>
+                <input class='required' id='xrange-0' type='text' size='3' /> to <input class='required' id='xrange-1' type='text'size='3' /> with <input class='required' id='xrange-2' type='text' size='3'/> points
+              </div>
+            </li>
+            <li><a href="#">Axis limits</a></li>
+            <li>
+              <div class='row'>
+                X: <input id='xlimits-0' type='text' size='3' /> to <input id='xlimits-1' type='text'size='3' />
+              </div>
+              <div class='row'>
+                Y: <input id='ylimits-0' type='text' size='3' /> to <input id='ylimits-1' type='text'size='3' />
+              </div>
+            </li>
+            <li><a href="#">Axis label</a></li>
+            <li>
+              <div class='row'>
+                X: <input id='xlabel' type='text' size='25' />
+              </div>
+              <div class='row'>
+                Y: <input id='ylabel' type='text' size='25' />
+              </div>
+            </li>
+            <li><a href="#">Plot title</a></li>
+            <li><input id='title' type='text' size='25' /></li>
+            <li>
+              <a href="#">Show grid: <input id='show_grid' type='checkbox' /></a>
+            </li>
+          </ul>
+          <!-- Functions -->
+          <!-- Cosine -->
+          <span class='sidebar-title'>Cosine: <input class='show-options' id='show_cos' type='checkbox' /></span>
+          <ul class="nav nav-sidebar fn-options cos-options hidden">
+            <li><a href="#">Label</a></li>
+            <li><input id='cos-label' type='text' size='25' /></li>
+            <li><a href="#">Amplitude: <input data-data_type='int' id='cos-amplitude' type='text' size='3' /></li></a>
+          </ul>
+          <!-- =========== -->
+          <!-- Sine -->
+          <span class='sidebar-title'>Sine: <input class='show-options' id='show_sin' type='checkbox' /></span>
+          <ul class="nav nav-sidebar fn-options sin-options hidden">
+            <li><a href="#">Label</a></li>
+            <li><input id='sin-label' type='text' size='25' /></li>
+            <li><a href="#">Amplitude: <input data-data_type='int' id='sin-amplitude' type='text' size='3' /></li></a>
+          </ul>
+          <!-- =========== -->
+          <!-- Polynomial -->
+          <span class='sidebar-title'>Polynomial: <input class='show-options' id='show_poly' type='checkbox' /></span>
+          <ul class="nav nav-sidebar fn-options poly-options hidden">
+            <li><a href="#">Label</a></li>
+            <li><input id='poly-label' type='text' size='25' /></li>
+            <li><a href="#">Coefficients (comma separated, no spaces, from a0 to aN)</a></li>
+            <li><input id='poly-coef' type='text' size='25' /></li>
+          </ul>
+          <!-- =========== -->
+          <div  style='padding-top: 20px;' class='row text-center'>
+            <button type="button" class="btn btn-lg btn-success" id='submit'>Plot</button>
+          </div>
+        </div>
+        <div class="col-sm-7 col-sm-offset-3 col-md-9 main">
+          <div class='row'>
+            <div class='col-md-12'>
+              <img id='plot' />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script src="{% static "js/dashboard.js" %}"></script>
+  <script>
+    window.GET_IMAGE_URL = '{% url "get_plot_image" %}';
+    window.CSRF_TOKEN = '{{ csrf_token }}';
+  </script>
+  </body>
+</html>
