@@ -1,5 +1,7 @@
 ## UOWfram
 
+Django Project designed for MAB225 discipline.
+
 Este projeto foi criado para a disciplina de computação 2 (MAB225) da UFRJ.
 
 Autores:
